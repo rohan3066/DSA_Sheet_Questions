@@ -19,7 +19,7 @@ vector<int> reverse_array(vector<int> &arr){
 int main(){
 
     vector<int>arr={1,4,7,3,8};
-    vector<int> reversed_arr=reverse_array(arr);
+    
     cout<<"reversed array: "<<endl;
     for(int i=0;i<arr.size();i++){
         cout<<arr[i]<<" ";
