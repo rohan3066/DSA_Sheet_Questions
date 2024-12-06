@@ -22,9 +22,7 @@ pair<int ,int>twoSum1(vector<int>arr,int target){
         if(map.find(moreNeeded)!=map.end()){
             return make_pair(map[moreNeeded],i);
         }
-
         map[num]=i;
-
     }
     return make_pair(-1,-1);
 }
