@@ -38,7 +38,14 @@ int findPeak(vector<int>&arr){
 }
 
 int main(){
-    vector<int>arr={1,3,20,4,1,0};
-    cout<<findPeak(arr)<<endl;
-    return 0;
+    // vector<int>arr={1,3,20,4,1,0};
+    // cout<<findPeak(arr)<<endl;
+    // return 0;
+
+    string s="Amar is chutya boy";
+    stringstream ss(s);
+    string word;
+    getline(cin,word);
+    cout<<word;
+    
 }
