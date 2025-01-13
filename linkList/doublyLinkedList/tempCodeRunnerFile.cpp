@@ -40,6 +40,36 @@ Node *insertAtEnd(Node *head,int val){
     return head;
 }
 
+Node *deleteHead(Node *head){
+    if(head==NULL || head->next==NULL){
+
+        return NULL; 
+    }
+
+    head=head->next;
+    head->prev=NULL;
+}
+
+Node *deleteEnd(Node *head){
+    if(head==NULL || head->next==NULL){
+
+        return NULL; 
+    }
+
+    Node *temp=head;
+
+    while(temp->next->next!=nullptr){
+        temp=temp->next;
+    }
+    
+    temp->next=NULL;
+
+
+    return head;
+}
+
+
+
 int main(){
     Node *head=new Node(1);
     head->next=new Node(2);
@@ -51,6 +81,20 @@ int main(){
 
     }
     cout<<endl;
+    Node *temp1=deleteEnd(temp);
+        while(temp1!=NULL){
+        cout<<temp1->data<<" ";
+        temp1=temp1->next;
+
+    }
+    cout<<endl;
+
+    Node *temp2=deleteHead(temp1);
+        while(temp2!=NULL){
+        cout<<temp2->data<<" ";
+        temp2=temp2->next;
+
+    }
 
     return 0;
 }
