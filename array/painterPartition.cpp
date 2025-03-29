@@ -8,7 +8,7 @@ int countPainters(vector<int>arr,int k,int time){
     int n=arr.size();
 
     for(int i=0;i<n;i++){
-        if(board+arr[i]<=time){
+        if(boards+arr[i]<=time){
             boards+=arr[i];
         }
 

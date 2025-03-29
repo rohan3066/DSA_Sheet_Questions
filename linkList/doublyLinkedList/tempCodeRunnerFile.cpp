@@ -5,96 +5,136 @@ class Node{
     public:
     int data;
     Node *next;
-    Node *prev;
+    Node *back;
 
-    Node(int data1,Node *next1,Node *prev1){
-        data=data1;
-        next=next1;
-        prev=prev1;
+    Node(int data,Node *next,Node *back){
+        this->data=data;
+        this->next=next;
+        this->back=back;
     }
 
-
-    Node(int data1){
-        data=data1;
-        next=NULL;
-        prev=NULL;
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+        this->back=NULL;
     }
+
+    
 };
 
-
-Node *insertAtEnd(Node *head,int val){
-    Node *temp1=new Node(val);
+Node *display(Node *head){
     Node *temp=head;
-
-    if(head==NULL){
-        return temp1;
-    }
-
-    while(temp->next!=NULL){
-        temp=temp->next;
-
-    }
-    temp->next=temp1;
-    temp1->prev=temp;
-
-    return head;
-}
-
-Node *deleteHead(Node *head){
-    if(head==NULL || head->next==NULL){
-
-        return NULL; 
-    }
-
-    head=head->next;
-    head->prev=NULL;
-}
-
-Node *deleteEnd(Node *head){
-    if(head==NULL || head->next==NULL){
-
-        return NULL; 
-    }
-
-    Node *temp=head;
-
-    while(temp->next->next!=nullptr){
-        temp=temp->next;
-    }
-    
-    temp->next=NULL;
-
-
-    return head;
-}
-
-
-
-int main(){
-    Node *head=new Node(1);
-    head->next=new Node(2);
-    head->next->prev=head;
-    Node *temp=insertAtEnd(head,13);
     while(temp!=NULL){
         cout<<temp->data<<" ";
         temp=temp->next;
-
     }
     cout<<endl;
-    Node *temp1=deleteEnd(temp);
-        while(temp1!=NULL){
-        cout<<temp1->data<<" ";
-        temp1=temp1->next;
+}
 
+Node *insertHead(Node *head,int val){
+    if(head==NULL){
+        return new Node(val);
     }
-    cout<<endl;
+    Node *newNode=new Node(val);
+    Node *temp=head;
 
-    Node *temp2=deleteHead(temp1);
-        while(temp2!=NULL){
-        cout<<temp2->data<<" ";
-        temp2=temp2->next;
+    newNode->next=head;
+    head->back=newNode;
+    head=newNode;
+    return head;
+}
 
+Node *insertTail(Node *head,int val){
+    Node *newNode=new Node(val);
+    Node *temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
     }
 
+    temp->next=newNode;
+    newNode->back=temp;
+    return head;
+}
+
+Node *insertAt_Kth(Node *head,int val,int k){
+    Node *newNode=new Node(val);
+    if(k==0){
+        return insertHead(head,val);
+    }
+    Node *temp=head;
+    while(k!=0){
+        temp=temp->next;
+        k--;
+    }
+    Node *temp2=temp->next;
+    temp->next=newNode;
+    newNode->back=temp;
+    newNode->next=temp2;
+
+    return head;
+
+}
+
+int deleteHead(Node *head){
+    if(head==NULL){
+        return -1;
+    }
+
+    Node *temp=head;
+    head=head->next;
+    head->back=NULL;
+
+    return temp->data;
+
+}
+int deleteTail(Node *head){
+    if(head==NULL){
+        return -1;
+    }
+    Node *temp=head;
+    while(temp->next->next!=NULL){
+        temp=temp->next;
+    }
+    Node *temp2=temp->next;
+    temp2->back=NULL;
+    temp2->next=NULL;
+    temp->next=NULL;
+    return temp2->data;
+
+}
+
+Node *reverseDLL(Node *head){
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+
+    Node *prev=NULL;
+    Node*curr=head;
+
+    while(curr!=NULL){
+        prev=curr->back;
+        curr->back=curr->next;
+        curr->next=prev;
+        curr=curr->back;
+    }
+
+    return prev->back;
+}
+int main(){
+    Node *head=new Node(10);
+    head->next=new Node(20,NULL,head);
+    head->next->next=new Node(30,NULL,head->next);
+    Node *res=insertHead(head,100);
+    Node *res1=insertTail(head,10442);
+    Node *res2=insertAt_Kth(head,522,2);
+    display(res1);
+    cout<<"deleted Node: "<<deleteHead(res2)<<endl;
+    cout<<"deleted Node: "<<deleteTail(res2)<<endl;
+    display(res2);
+    Node *ans2=reverseDLL(res2);
+    display(ans2);
+
+
+    cout<<"Hello bhai logo......."<<endl;
     return 0;
 }
