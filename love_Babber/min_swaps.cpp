@@ -11,7 +11,7 @@
 
 // Input: arr[] = {2, 7, 9, 8, 5, 7, 4}, k = 5
 // Output: 1
-// Explanation: To bring elements 2, 5 and 4 together, swap arr[0] with arr[5]. Final array will be arr[] = {7, 7, 9, 8, 5, 2, 4}.
+// Explanation: To bring elements 2, 5 and 4 together, s
 
 #include<bits/stdc++.h>
 using namespace std;
